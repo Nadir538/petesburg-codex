@@ -24,7 +24,10 @@ app.use((req, res, next) => {
 });
 
 // Path to custom posts storage file
-const CUSTOM_POSTS_PATH = path.join(__dirname, 'registration-page', 'data', 'custom_posts.json');
+const useAmveraData = fs.existsSync('/data');
+const CUSTOM_POSTS_PATH = useAmveraData
+  ? '/data/custom_posts.json'
+  : path.join(__dirname, 'registration-page', 'data', 'custom_posts.json');
 
 // Ensure parent data directory and default custom_posts.json file exist
 try {
