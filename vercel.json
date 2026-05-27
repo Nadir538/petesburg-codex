@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/feed",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/registration-page/api/feed",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/NODEBOX/(.*)",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server.ts"
+    }
+  ]
+}

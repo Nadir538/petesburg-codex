@@ -1,0 +1,40 @@
+{
+  "chapters": [
+    {
+      "id": "hermitage",
+      "title": "Эрмитаж / Зимний дворец",
+      "image": "NODEBOX/Hermitage/Hermitage.jpeg",
+      "totalQuestions": 20,
+      "completedQuestions": 0,
+      "locked": false,
+      "description": "Крупнейший художественный музей мира"
+    },
+    {
+      "id": "isaac-cathedral",
+      "title": "Исаакиевский собор",
+      "image": "NODEBOX/isaakievskiy/isaakievskiy.jpeg",
+      "totalQuestions": 20,
+      "completedQuestions": 0,
+      "locked": false,
+      "description": "Величественный православный собор"
+    },
+    {
+      "id": "savior-on-blood",
+      "title": "Храм Спаса на Крови",
+      "image": "NODEBOX/Church/Church.jpeg",
+      "totalQuestions": 20,
+      "completedQuestions": 0,
+      "locked": false,
+      "description": "Уникальный храм в русском стиле"
+    },
+    {
+      "id": "peterhof",
+      "title": "Петергоф",
+      "image": "NODEBOX/Peterhof/Peterhof.jpeg",
+      "totalQuestions": 20,
+      "completedQuestions": 0,
+      "locked": false,
+      "description": "Дворцово-парковый ансамбль с фонтанами"
+    }
+  ]
+}

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кодекс Петербурга — Вестник Хранителей</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fdf8ee',
+                            100: '#fbf0d5',
+                            500: '#d97706',
+                            600: '#b45309',
+                            700: '#78350f',
+                            900: '#451a03',
+                        },
+                        obsidian: '#121214',
+                        slate: {
+                            850: '#1a1a1f'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Georgia', 'serif'],
+                        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transition for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, text-color 0.3s ease;
+        }
+        /* Custom scrollbar matching the atmosphere */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b45309;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-slate-900 dark:bg-obsidian dark:text-neutral-100 min-h-screen font-sans flex flex-col antialiased">
+
+    <!-- Top Navigation Bar -->
+    <header class="border-b border-amber-200/40 dark:border-neutral-800/60 bg-white/70 dark:bg-obsidian/70 backdrop-blur-md sticky top-0 z-40" id="header-nav">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🏛️</span>
+                <div>
+                    <h1 class="font-serif font-bold text-lg md:text-xl tracking-tight text-amber-700 dark:text-amber-500">
+                        КОДЕКС ПЕТЕРБУРГА
+                    </h1>
+                    <p class="text-[10px] md:text-xs text-slate-500 dark:text-neutral-400 font-mono tracking-wider uppercase">
+                        Вестник Хранителей Города
+                    </p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center space-x-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-btn" class="p-2.5 rounded-xl border border-amber-200/50 dark:border-neutral-800 hover:bg-amber-100/50 dark:hover:bg-neutral-800/50 text-amber-600 dark:text-amber-500 transition-all cursor-pointer" title="Переключить тему">
+                    <span id="theme-icon" class="text-lg">🌙</span>
+                </button>
+
+                <!-- Current Space Date (Vibes Indicator) -->
+                <div class="hidden sm:flex flex-col text-right font-mono text-[11px] text-slate-550 dark:text-neutral-400 border-l border-amber-200/40 dark:border-neutral-800 pl-3">
+                    <span id="date-time" class="font-bold">ПЕТЕРБУРГ</span>
+                    <span id="date-stamp" class="opacity-80">КУЛЬТУРНЫЙ СЛОЙ</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container (With Fix 2: Pushed down so nothing is cut off at the top) -->
+    <main class="max-w-3xl mx-auto px-4 pt-16 pb-10 md:pt-24 md:pb-16 flex-grow w-full">
+
+        <!-- Banner / Intro Block (With Fix 2 & Fix 3: Lowered top spacing and high visibility button inside banner) -->
+        <section id="banner-block" class="mt-8 mb-10 p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-850 border border-amber-200 dark:border-neutral-800/80 shadow-md relative overflow-hidden transition-all duration-300">
+            <!-- Background element -->
+            <div class="absolute right-0 top-0 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="max-w-xl">
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold mb-3 text-slate-900 dark:text-amber-500 leading-snug">
+                        Вестник петербурга
+                    </h2>
+                    <p class="text-xs md:text-sm text-slate-550 dark:text-neutral-300 leading-relaxed font-sans">
+                        Свежие события, лекции, фестивали и важные указы из самого сердца северной столицы
+                    </p>
+                </div>
+                
+                <!-- PUBLISH DECREE BUTTON (Fix 3: Vibrant amber theme, 100% visible in both light & dark themes) -->
+                <button id="open-modal-btn" class="shrink-0 px-5 py-3 rounded-xl font-bold text-xs md:text-sm tracking-wide bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white hover:scale-105 active:scale-95 transition-all duration-200 shadow-md flex items-center justify-center gap-1.5 cursor-pointer" title="Добавить указ или статью">
+                    <span>+</span>
+                    Опубликовать указ
+                </button>
+            </div>
+        </section>
+
+        <!-- Feed Head Controls (Simplified, no duplicate button) -->
+        <div class="flex items-end justify-between mb-6 pb-2 border-b border-amber-250/25 dark:border-neutral-800">
+            <div>
+                <h3 class="font-serif text-lg font-bold text-slate-850 dark:text-neutral-200">
+                    Лента вестей и событий
+                </h3>
+                <p class="text-[10px] md:text-xs text-slate-500 dark:text-neutral-450 mt-1 font-mono uppercase tracking-wider">
+                    События и летописи Культурного Слоя
+                </p>
+            </div>
+        </div>
+
+        <!-- THE FEED (With Fix 2: First block is lowered/spaced and styled with elegance) -->
+        <div id="posts-feed" class="space-y-6">
+            <!-- Loader Placeholder Shimmer -->
+            <div id="feed-loader" class="space-y-6">
+                <div class="p-6 rounded-3xl bg-white dark:bg-slate-850 animate-pulse border border-amber-100 dark:border-neutral-800">
+                    <div class="h-4 bg-amber-200/50 dark:bg-neutral-800 rounded w-1/4 mb-4"></div>
+                    <div class="h-6 bg-amber-200/50 dark:bg-neutral-800 rounded w-3/4 mb-3"></div>
+                    <div class="h-4 bg-amber-100/50 dark:bg-neutral-800 rounded w-full mb-2"></div>
+                    <div class="h-4 bg-amber-100/50 dark:bg-neutral-800 rounded w-5/6"></div>
+                </div>
+                <div class="p-6 rounded-3xl bg-white dark:bg-slate-850 animate-pulse border border-amber-100 dark:border-neutral-800">
+                    <div class="h-4 bg-amber-200/50 dark:bg-neutral-800 rounded w-1/4 mb-4"></div>
+                    <div class="h-6 bg-amber-200/50 dark:bg-neutral-800 rounded w-1/2 mb-3"></div>
+                    <div class="h-4 bg-amber-100/50 dark:bg-neutral-800 rounded w-full mb-2"></div>
+                </div>
+            </div>
+
+            <!-- Error Boundary Container (With Fix 1: High visibility Try Again Button in Dark theme) -->
+            <div id="feed-error" class="hidden py-10 px-6 rounded-3xl border border-red-200 dark:border-red-950/40 bg-red-500/5 text-center transition-all duration-300 max-w-lg mx-auto">
+                <span class="text-4xl block mb-3">🏚️</span>
+                <h4 class="font-serif font-bold text-lg text-red-700 dark:text-red-400">Связь с Хранилищем прервана</h4>
+                <p class="text-sm mt-2 text-slate-600 dark:text-neutral-400 leading-relaxed">
+                    Произошел загадочный сбой при получении новостного вестника. Убедитесь, что сервер Кодекса отвечает на запросы.
+                </p>
+                <div class="mt-6 flex justify-center">
+                    <!-- TRY AGAIN BUTTON (Fix 1: Exceptionally visible in dark theme via solid dark-theme amber and white text) -->
+                    <button id="retry-btn" class="px-5 py-3 rounded-xl font-bold text-xs md:text-sm tracking-wide bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white hover:scale-105 active:scale-95 transition-all duration-200 shadow-md flex items-center justify-center gap-1.5 cursor-pointer" title="Перезагрузить ленту">
+                        <span>🔄</span>
+                        Попробовать снова
+                    </button>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="feed-empty" class="hidden py-12 text-center rounded-3xl border border-amber-200/40 dark:border-neutral-800 bg-white/40 dark:bg-slate-850/40">
+                <span class="text-3xl block mb-2">📜</span>
+                <p class="text-slate-500 dark:text-neutral-450 font-serif">В летописях пока пусто...</p>
+            </div>
+
+            <!-- Dynamic Posts go here -->
+            <div id="posts-container" class="space-y-8"></div>
+        </div>
+    </main>
+
+    <!-- Modal Form (For Publishing Decrees) -->
+    <div id="modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <!-- Modal Dialog Container -->
+        <div class="relative bg-white dark:bg-slate-855 rounded-3xl border border-amber-100 dark:border-neutral-800 shadow-2xl max-w-lg w-full p-6 md:p-8 transform transition-all duration-300" id="modal-box">
+            <!-- Close Button -->
+            <button id="close-modal-btn" class="absolute top-5 right-5 p-2 rounded-lg text-slate-450 hover:bg-amber-100/50 dark:hover:bg-neutral-850 transition-colors cursor-pointer">
+                <span class="text-xl">✕</span>
+            </button>
+
+            <!-- Title -->
+            <div class="mb-5">
+                <h3 class="font-serif text-2xl font-bold text-slate-900 dark:text-amber-500 flex items-center gap-2">
+                    <span>📜</span>
+                    Писание нового указа
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-neutral-400 mt-1">
+                    События и волеизъявления Хранителей города
+                </p>
+            </div>
+
+            <!-- Form -->
+            <form id="add-post-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono mb-1 text-slate-500 dark:text-neutral-450 uppercase">Заголовок указа *</label>
+                    <input type="text" id="post-title" required class="w-full px-4 py-2.5 rounded-xl border border-amber-200/60 dark:border-neutral-800 bg-amber-50/10 dark:bg-neutral-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm" placeholder="Например: Указ №41: О реставрации крыш">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-mono mb-1 text-slate-500 dark:text-neutral-450 uppercase">Категория</label>
+                        <select id="post-category" class="w-full px-4 py-2.5 rounded-xl border border-amber-200/60 dark:border-neutral-800 bg-amber-50/10 dark:bg-neutral-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm cursor-pointer">
+                            <option value="указ">Указ Хранителей</option>
+                            <option value="событие">Событие</option>
+                            <option value="культура">Культура Петербурга</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono mb-1 text-slate-500 dark:text-neutral-450 uppercase">Автор ведомости</label>
+                        <input type="text" id="post-author" class="w-full px-4 py-2.5 rounded-xl border border-amber-200/60 dark:border-neutral-800 bg-amber-50/10 dark:bg-neutral-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm" placeholder="Администратор">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono mb-1 text-slate-500 dark:text-neutral-450 uppercase">Окружение (Ссылка на изображение)</label>
+                    <select id="post-image" class="w-full px-4 py-2.5 rounded-xl border border-amber-200/60 dark:border-neutral-800 bg-amber-50/10 dark:bg-neutral-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm cursor-pointer">
+                        <option value="NODEBOX/Hermitage/Hermitage.jpeg">🏛️ Государственный Эрмитаж</option>
+                        <option value="NODEBOX/isaakievskiy/isaakievskiy.jpeg">⛪ Исаакиевский Собор</option>
+                        <option value="roofs">🌅 Крыши Невского проспекта</option>
+                        <option value="canal">🛶 Каналы и Мосты Петербурга</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-mono mb-1 text-slate-500 dark:text-neutral-450 uppercase">Содержание предписания *</label>
+                    <textarea id="post-content" required rows="4" class="w-full px-4 py-2.5 rounded-xl border border-amber-200/60 dark:border-neutral-800 bg-amber-50/10 dark:bg-neutral-900 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent text-sm" placeholder="Напишите полный текст вашего указа или культурного события в деталях..."></textarea>
+                </div>
+
+                <div class="flex items-center justify-end space-x-3 pt-4 border-t border-amber-100 dark:border-neutral-800">
+                    <button type="button" id="cancel-modal-btn" class="px-4 py-2 text-xs font-bold rounded-xl border border-amber-250 hover:bg-amber-150 text-slate-700 dark:border-neutral-800 dark:hover:bg-neutral-800 dark:text-neutral-300 cursor-pointer">
+                        Отмена
+                    </button>
+                    <button type="submit" class="px-5 py-2 text-xs font-bold rounded-xl bg-amber-600 hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600 text-white cursor-pointer shadow-md transition-all">
+                        Опубликовать
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-amber-200/30 dark:border-neutral-800/80 bg-white/20 dark:bg-neutral-950/20 py-6 text-center text-xs font-mono text-slate-400 dark:text-neutral-550">
+        <div class="max-w-5xl mx-auto px-4">
+            <p>Санкт-Петербург © 2026. Кодекс Вечности.</p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // DOM Elements
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const dateTimeEl = document.getElementById('date-time');
+        const retryBtn = document.getElementById('retry-btn');
+        const openModalBtn = document.getElementById('open-modal-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const cancelModalBtn = document.getElementById('cancel-modal-btn');
+        const modal = document.getElementById('modal');
+        const modalBox = document.getElementById('modal-box');
+        const addPostForm = document.getElementById('add-post-form');
+        const postsContainer = document.getElementById('posts-container');
+        const feedLoader = document.getElementById('feed-loader');
+        const feedError = document.getElementById('feed-error');
+        const feedEmpty = document.getElementById('feed-empty');
+
+        // State variables
+        let isDarkMode = true; // Let's default to obsidian (dark mode) as a mystique-fitted style
+        
+        // Map Unsplash high-res illustrations to placeholder categories
+        const illustrations = {
+            'NODEBOX/Hermitage/Hermitage.jpeg': 'https://images.unsplash.com/photo-1598387114407-28d8b9e6e873?auto=format&fit=crop&w=1200&q=80',
+            'NODEBOX/isaakievskiy/isaakievskiy.jpeg': 'https://images.unsplash.com/photo-1555436169-20e93ea9a7ff?auto=format&fit=crop&w=1200&q=80',
+            'roofs': 'https://images.unsplash.com/photo-1548834925-e48f8a27ae6f?auto=format&fit=crop&w=1200&q=80',
+            'canal': 'https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&w=1200&q=80'
+        };
+
+        const fallbackImages = [
+            'https://images.unsplash.com/photo-1572945281861-18dd9551e418?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1548834925-e48f8a27ae6f?auto=format&fit=crop&w=1200&q=80',
+            'https://images.unsplash.com/photo-1520038410233-7141be7e6f97?auto=format&fit=crop&w=1200&q=80'
+        ];
+
+        // Format Date logic
+        function updateDateTime() {
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const timeStr = new Date().toLocaleTimeString('ru-RU', options);
+            dateTimeEl.innerText = `ПЕТЕРБУРГ ${timeStr}`;
+            const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('date-stamp').innerText = new Date().toLocaleDateString('ru-RU', dateOptions).toUpperCase();
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Theme Toggle Setup
+        function initTheme() {
+            // Read saved preference or default to dark
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                isDarkMode = false;
+                document.documentElement.classList.remove('dark');
+                themeIcon.innerText = '☀️';
+            } else {
+                isDarkMode = true;
+                document.documentElement.classList.add('dark');
+                themeIcon.innerText = '🌙';
+            }
+        }
+
+        themeBtn.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+                themeIcon.innerText = '🌙';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeIcon.innerText = '☀️';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Initialize Theme Mode
+        initTheme();
+
+        // Modal Visibility handlers
+        function toggleModal(show) {
+            if (show) {
+                modal.classList.remove('hidden');
+                // Trigger transition effect on box
+                setTimeout(() => {
+                    modalBox.classList.remove('scale-95', 'opacity-0');
+                }, 50);
+            } else {
+                modalBox.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 150);
+            }
+        }
+
+        openModalBtn.addEventListener('click', () => toggleModal(true));
+        closeModalBtn.addEventListener('click', () => toggleModal(false));
+        cancelModalBtn.addEventListener('click', () => toggleModal(false));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) toggleModal(false);
+        });
+
+        // Fetch Posts from /api/feed API
+        async function fetchFeed() {
+            // State: Loading
+            postsContainer.innerHTML = '';
+            feedLoader.classList.remove('hidden');
+            feedError.classList.add('hidden');
+            feedEmpty.classList.add('hidden');
+
+            try {
+                const response = await fetch('/api/feed');
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                
+                feedLoader.classList.add('hidden');
+
+                if (data.success && data.posts && data.posts.length > 0) {
+                    renderPosts(data.posts);
+                } else {
+                    feedEmpty.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Failed to loading feed:', error);
+                feedLoader.classList.add('hidden');
+                feedError.classList.remove('hidden'); // Show retry view
+            }
+        }
+
+        // Render posts listing
+        function renderPosts(posts) {
+            postsContainer.innerHTML = '';
+            
+            posts.forEach((post, index) => {
+                const article = document.createElement('article');
+                
+                // Determine image URL beautifully
+                let imgUrl = '';
+                if (post.images && post.images.length > 0) {
+                    const rawImg = post.images[0].image || post.images[0].image_url;
+                    imgUrl = illustrations[rawImg] || rawImg || fallbackImages[index % fallbackImages.length];
+                } else {
+                    imgUrl = fallbackImages[index % fallbackImages.length];
+                }
+
+                // Check Category Tag Color setup
+                let tagColor = 'bg-amber-150 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 border-amber-300/30';
+                if (post.category && post.category.toLowerCase() === 'указ') {
+                    tagColor = 'bg-red-500/10 text-red-700 dark:bg-red-950/40 dark:text-red-400 border-red-500/20';
+                } else if (post.category && post.category.toLowerCase() === 'событие') {
+                    tagColor = 'bg-sky-500/10 text-sky-700 dark:bg-sky-950/40 dark:text-sky-400 border-sky-500/20';
+                } else if (post.category && post.category.toLowerCase() === 'культура') {
+                    tagColor = 'bg-purple-500/10 text-purple-700 dark:bg-purple-950/40 dark:text-purple-400 border-purple-500/20';
+                }
+
+                // Date formatting
+                const postDate = new Date(post.publication_date * 1000);
+                const formatOpts = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
+                const formattedDate = postDate.toLocaleDateString('ru-RU', formatOpts);
+
+                // Fix 2: If it's the first/top block, we lower/add top spacing elegantly
+                const firstBlockSpacing = index === 0 ? 'mt-4 md:mt-6' : '';
+
+                article.className = `p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-850 hover:bg-amber-100/10 dark:hover:bg-neutral-850/50 border border-amber-200/30 dark:border-neutral-800/80 shadow-md transform transition-all hover:scale-[1.005] duration-300 flex flex-col md:flex-row gap-6 relative overflow-hidden ${firstBlockSpacing}`;
+                
+                // Build layout
+                article.innerHTML = `
+                    <!-- Left: Illustration -->
+                    <div class="w-full md:w-2/5 h-48 md:h-auto min-h-[160px] rounded-2xl overflow-hidden relative shadow-inner bg-amber-100/50 dark:bg-neutral-900">
+                        <img src="${imgUrl}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" loading="lazy" />
+                        <!-- Subtle corner shadow -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    </div>
+
+                    <!-- Right: Content details -->
+                    <div class="w-full md:w-3/5 flex flex-col justify-between">
+                        <div>
+                            <!-- Header meta tags -->
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-0.5 text-[10px] font-mono uppercase font-bold tracking-wider rounded-md border ${tagColor}">
+                                    ${post.category || 'событие'}
+                                </span>
+                                <time class="text-xs font-mono text-slate-400 dark:text-neutral-550">${formattedDate}</time>
+                            </div>
+
+                            <!-- Title -->
+                            <h4 class="font-serif text-lg md:text-xl font-bold mb-2.5 leading-snug text-slate-900 dark:text-neutral-50 hover:text-amber-600 dark:hover:text-amber-500">
+                                ${post.title}
+                            </h4>
+
+                            <!-- Description -->
+                            <p class="text-xs mb-4 text-slate-550 dark:text-neutral-300 line-clamp-4 leading-relaxed font-sans">
+                                ${post.description}
+                            </p>
+                        </div>
+
+                        <!-- Author panel -->
+                        <div class="pt-4 border-t border-amber-100/30 dark:border-neutral-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-neutral-450">
+                            <span class="flex items-center gap-1.5">
+                                <span class="text-amber-500">✍️</span>
+                                Писарь: ${post.author || 'Хранитель'}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                
+                postsContainer.appendChild(article);
+            });
+        }
+
+        // Handle Add Post Submission
+        addPostForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('post-title').value;
+            const category = document.getElementById('post-category').value;
+            const author = document.getElementById('post-author').value || 'Администратор';
+            const rawImageSel = document.getElementById('post-image').value;
+            const content = document.getElementById('post-content').value;
+
+            try {
+                const response = await fetch('/api/feed', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        title,
+                        category,
+                        image: rawImageSel,
+                        content,
+                        author
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Не удалось опубликовать указ');
+                }
+
+                const result = await response.json();
+                if (result.success) {
+                    toggleModal(false);
+                    addPostForm.reset();
+                    fetchFeed(); // Refresh feed list
+                } else {
+                    alert('Ошибка сервера: ' + (result.message || 'неизвестно'));
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Не удалось соединиться с сервером постов: ' + error.message);
+            }
+        });
+
+        // Retry event handler
+        retryBtn.addEventListener('click', fetchFeed);
+
+        // Initial fetch feed launch
+        fetchFeed();
+    </script>
+</body>
+</html>

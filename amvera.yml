@@ -1,0 +1,13 @@
+meta:
+  environment: nodejs
+  toolchain: npm
+
+build:
+  requirements:
+    - nodejs: 20
+  command: npm run build
+
+run:
+  persistence:
+    - /registration-page/data
+  command: npm start

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Путь главы | Петербургский кодекс</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/chapter-path.css">
+
+    <!-- Pre-render auth guard -->
+    <script>
+      (function () {
+        try {
+          if (!localStorage.getItem('spb_current_user')) {
+            try { sessionStorage.setItem('spb_redirect_after_login', location.href); } catch (_) {}
+            document.documentElement.style.visibility = 'hidden';
+            location.replace('login.html');
+          }
+        } catch (e) { location.replace('login.html'); }
+      })();
+    </script>
+</head>
+<body class="chapter-path-page">
+
+    <!-- Header -->
+    <header class="path-header">
+        <button class="back-btn" id="back-btn" aria-label="Назад к главам">
+            <svg width="24" height="24" viewBox="0 0 24 24" 
+                 fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        
+        <div class="header-info">
+            <h1 class="chapter-name" id="chapter-name">Загрузка...</h1>
+            <p class="chapter-desc" id="chapter-desc"></p>
+        </div>
+    </header>
+
+    <!-- Hero Image -->
+    <div class="chapter-hero">
+        <img id="chapter-hero-img" src="" alt="" class="hero-img">
+        <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Episodes Path -->
+    <main class="path-main">
+        <div class="path-container">
+            
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value"><span id="completed-count">0</span> / <span id="total-count">6</span></span>
+                    <span class="stat-label">Эпизоды</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value"><span id="earned-score">0</span> / <span id="max-score">240</span></span>
+                    <span class="stat-label">Баллы</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value" id="progress-percent">0%</span>
+                    <span class="stat-label">Прогресс</span>
+                </div>
+            </div>
+
+            <!-- Episodes List -->
+            <div class="episodes-path" id="episodes-path">
+                <!-- Генерируется через JS -->
+            </div>
+
+        </div>
+    </main>
+
+    <div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+    
+    <script type="module" src="js/chapter-path.js"></script>
+</body>
+</html> 

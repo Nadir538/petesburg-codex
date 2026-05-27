@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Эпизод изучения Эрмитажа">
+    <meta name="theme-color" content="#D4A574">
+    
+    <title>Эпизод 1 | Петербургский кодекс</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/toast.css">
+    <link rel="stylesheet" href="css/episode.css">
+
+    <!-- Pre-render auth guard -->
+    <script>
+      (function () {
+        try {
+          if (!localStorage.getItem('spb_current_user')) {
+            try { sessionStorage.setItem('spb_redirect_after_login', location.href); } catch (_) {}
+            document.documentElement.style.visibility = 'hidden';
+            location.replace('login.html');
+          }
+        } catch (e) { location.replace('login.html'); }
+      })();
+    </script>
+</head>
+<body class="episode-page">
+    <!-- Skip to main content -->
+    <a href="#episode-content" class="skip-link sr-only">Перейти к контенту</a>
+    
+    <!-- Header -->
+    <header class="episode-header">
+        <button class="back-btn" id="back-btn" aria-label="Назад">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        
+        <div class="header-info">
+            <h2 class="chapter-title" id="chapter-title">Загрузка...</h2>
+            <div class="progress-indicator">
+                <span id="episode-progress">Эпизод 1 из 6</span>
+            </div>
+        </div>
+        
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Переключить тему">
+            <svg class="theme-icon theme-icon-light" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <svg class="theme-icon theme-icon-dark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+        </button>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="episode-content" id="episode-content">
+        <!-- Story Section -->
+        <section class="story-section" id="story-section">
+            <div class="story-card">
+                <div class="story-icon" id="story-icon">📜</div>
+                
+                <h3 class="story-title" id="story-title">Загрузка...</h3>
+                <p class="story-text" id="story-text">Загрузка...</p>
+                
+                <div class="story-image-container">
+                    <img src="" alt="" class="story-image" id="story-image" loading="lazy">
+                </div>
+                
+                <!-- Story Slideshow Dots -->
+                <div class="story-dots-container" id="story-dots"></div>
+            </div>
+        </section>
+        
+        <!-- Questions Section -->
+        <section class="questions-section" id="questions-section" style="display: none;">
+            <div id="quiz-container"></div>
+            
+            <div class="quiz-nav">
+                <button class="quiz-nav-btn" id="prev-question-btn" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                    Назад
+                </button>
+                
+                <button class="quiz-nav-btn quiz-nav-btn-primary" id="next-question-btn">
+                    Далее
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+        
+        <!-- Episode Navigation -->
+        <div class="episode-nav" id="episode-nav">
+            <div class="episode-btn-group" id="story-controls">
+                <button class="episode-secondary-btn" id="story-prev-btn" style="display: none;">
+                    ← Назад
+                </button>
+                <button class="episode-nav-btn" id="story-next-btn">
+                    Далее →
+                </button>
+            </div>
+            <!-- Hidden button to maintain compatibility -->
+            <button id="start-questions-btn" style="display: none;"></button>
+        </div>
+    </main>
+    
+    <!-- Toast Notification -->
+    <div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/episode.js"></script>
+</body>
+</html>

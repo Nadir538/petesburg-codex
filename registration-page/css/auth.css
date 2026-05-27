@@ -1,0 +1,108 @@
+/**
+ * Auth Pages Styles
+ * Общие стили для страниц авторизации (login, register)
+ */
+
+/* Auth Page Body */
+.auth-page {
+    overflow-x: hidden;
+  }
+  
+  /* Back Link */
+  .back-link {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 12px var(--shadow-light);
+  }
+  
+  .back-link:hover {
+    background: var(--glass-white-hover);
+    border-color: var(--primary-gold);
+    transform: translateX(-4px);
+    box-shadow: 0 6px 16px var(--shadow-medium);
+  }
+  
+  .back-link svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform var(--transition-normal);
+  }
+  
+  .back-link:hover svg {
+    transform: translateX(-2px);
+  }
+  
+  /* Auth Container */
+  .auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  
+  .auth-section {
+    max-width: 480px;
+    width: 100%;
+  }
+  
+  /* Auth Form */
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  
+  .auth-link {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  /* Responsive */
+  @media (max-width: 767px) {
+    .back-link {
+      top: 16px;
+      left: 16px;
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+    
+    .auth-container {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .back-link span {
+      display: none;
+    }
+    
+    .back-link {
+      padding: 8px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      justify-content: center;
+    }
+  }

@@ -1,0 +1,131 @@
+/**
+ * Form Styles
+ * Стили для формы регистрации
+ */
+
+ .registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Form Title */
+.form-title {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px var(--shadow-medium);
+}
+
+.form-title-subtitle {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+  letter-spacing: 0.3px;
+}
+
+/* Form Fields Container */
+#form-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Form Footer */
+.form-footer {
+  margin-top: var(--spacing-md);
+}
+
+.login-link {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Error Message */
+.form-error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  color: #fca5a5;
+  font-size: 14px;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  animation: shake 0.5s ease;
+}
+
+.form-error::before {
+  content: '⚠';
+  font-size: 18px;
+}
+
+/* Success Message */
+.form-success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  color: #86efac;
+  font-size: 14px;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  animation: fadeInUp 0.5s ease;
+}
+
+.form-success::before {
+  content: '✓';
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Loading State */
+.form-loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.form-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border: 2px solid var(--glass-border);
+  border-top-color: var(--primary-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .form-title {
+    font-size: 28px;
+  }
+  
+  .form-title-subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-title {
+    font-size: 24px;
+  }
+}

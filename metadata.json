@@ -1,0 +1,8 @@
+{
+  "name": "Кодекс Петербурга",
+  "description": "Интерактивная лента вестей и указов Хранителей Санкт-Петербурга с поддержкой смены тем оформления и обратной связи.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

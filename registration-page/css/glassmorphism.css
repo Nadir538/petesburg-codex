@@ -1,0 +1,100 @@
+/**
+ * Glassmorphism Effects
+ * Эффекты матового стекла для карточек и элементов
+ */
+
+ .glass-card {
+  background: var(--glass-white);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 50px 40px;
+  box-shadow: 
+    0 8px 32px var(--shadow-light),
+    0 1px 2px var(--shadow-medium),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-slow);
+}
+
+/* Subtle gradient overlay */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 0.6;
+}
+
+/* Hover effect */
+.glass-card:hover {
+  background: var(--glass-white-hover);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 12px 40px var(--shadow-medium),
+    0 2px 4px var(--shadow-strong),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Glass variant for smaller elements */
+.glass-element {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.glass-element:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Dark glass variant */
+.glass-dark {
+  background: var(--glass-dark);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(18px)) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.25);
+  }
+  
+  .glass-element {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .glass-card {
+    padding: 40px 30px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-card {
+    padding: 30px 20px;
+  }
+}

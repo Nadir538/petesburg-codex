@@ -1,0 +1,57 @@
+{
+  "fields": [
+    {
+      "name": "name",
+      "type": "text",
+      "label": "Имя",
+      "placeholder": "Введите ваше имя",
+      "icon": "user",
+      "required": true,
+      "autocomplete": "name",
+      "validation": {
+        "required": true,
+        "name": true,
+        "minLength": 2,
+        "maxLength": 50
+      }
+    },
+    {
+      "name": "email",
+      "type": "email",
+      "label": "Email",
+      "placeholder": "example@mail.com",
+      "icon": "envelope",
+      "required": true,
+      "autocomplete": "email",
+      "validation": {
+        "required": true,
+        "email": true,
+        "maxLength": 100
+      }
+    },
+    {
+      "name": "password",
+      "type": "password",
+      "label": "Пароль",
+      "placeholder": "Минимум 8 символов",
+      "icon": "lock",
+      "required": true,
+      "autocomplete": "new-password",
+      "validation": {
+        "required": true,
+        "password": true,
+        "minLength": 8,
+        "maxLength": 128
+      }
+    }
+  ],
+  "submitButton": {
+    "text": "Зарегистрироваться",
+    "loadingText": "Регистрация..."
+  },
+  "messages": {
+    "success": "Регистрация успешна! Добро пожаловать!",
+    "error": "Ошибка регистрации. Попробуйте снова.",
+    "validationError": "Пожалуйста, исправьте ошибки в форме"
+  }
+}

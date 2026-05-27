@@ -1,0 +1,202 @@
+/**
+ * Button Styles
+ * Стили для кнопок с анимациями и эффектами
+ */
+
+ .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: 16px 32px;
+  font-family: var(--font-accent);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-align: center;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+
+/* Primary Button (Gold) */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%);
+  color: #12131A;
+  box-shadow: 
+    0 8px 24px var(--shadow-gold),
+    0 2px 4px var(--shadow-medium);
+  font-weight: 700;
+}
+
+/* Shine Effect */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Hover State */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 32px var(--shadow-gold-hover),
+    0 4px 8px var(--shadow-strong);
+  filter: brightness(1.1);
+}
+
+/* Active State */
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 4px 16px var(--shadow-gold),
+    0 1px 2px var(--shadow-medium);
+}
+
+/* Focus State */
+.btn-primary:focus-visible {
+  outline: 3px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* Loading State */
+.btn-loading {
+  pointer-events: none;
+  opacity: 0.8;
+  position: relative;
+}
+
+.btn-loading .btn-text {
+  opacity: 0;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* Disabled State */
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn:disabled:hover {
+  filter: none;
+}
+
+/* Secondary Button (Outline) */
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--glass-border);
+  box-shadow: 0 4px 12px var(--shadow-light);
+}
+
+.btn-secondary:hover {
+  background: var(--glass-white);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Icon Buttons */
+.btn-icon {
+  padding: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+.btn-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+/* Full Width Button */
+.btn-block {
+  width: 100%;
+}
+
+/* Success Animation */
+@keyframes success-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  animation: success-pulse 0.6s ease;
+}
+
+/* Error Animation */
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.btn-error {
+  animation: error-shake 0.5s ease;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .btn {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+  
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn-primary::before {
+    transition: none;
+    animation: none;
+  }
+}

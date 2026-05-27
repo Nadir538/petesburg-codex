@@ -1,0 +1,316 @@
+/**
+ * Chapter Cards Styles
+ * Карточки глав с фоновыми изображениями
+ */
+
+/* Chapters Grid */
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+/* Chapter Card */
+.chapter-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s ease;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border);
+}
+
+.chapter-card:hover:not(.locked) {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: var(--card-hover-shadow), 0 0 20px rgba(197, 155, 109, 0.15);
+  border-color: var(--accent-primary);
+}
+
+.chapter-card:active {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Card Background Image */
+.card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.chapter-card:hover .card-image {
+  transform: scale(1.1);
+}
+
+/* Gradient Overlay */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.3) 70%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  transition: opacity var(--transition-normal);
+}
+
+.chapter-card:hover .card-overlay {
+  opacity: 0.9;
+}
+
+/* Glass Content Container */
+.card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--glass-border);
+  transform: translateY(0);
+  transition: all var(--transition-normal);
+}
+
+.chapter-card:hover .card-content {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="dark"] .chapter-card:hover .card-content {
+  background: rgba(28, 28, 30, 0.9);
+}
+
+/* Card Title */
+.card-title {
+  font-family: var(--font-accent);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-inverse);
+  margin: 0 0 8px;
+  letter-spacing: 0.3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .card-title {
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+/* Progress Info */
+.card-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+[data-theme="dark"] .card-progress {
+  color: var(--text-secondary);
+}
+
+.progress-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.8;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  margin-top: 12px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+[data-theme="dark"] .progress-bar-container {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+  box-shadow: 0 0 8px var(--accent-primary);
+}
+
+/* Lock Badge (для заблокированных глав) */
+.card-lock-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-lock-badge svg {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+/* Locked State */
+.chapter-card.locked {
+  opacity: 0.8;
+  cursor: not-allowed;
+  border-color: rgba(197, 155, 109, 0.1);
+}
+
+.chapter-card.locked .card-image {
+  filter: blur(4px) brightness(0.6) grayscale(0.7);
+  transform: scale(1.02);
+}
+
+.chapter-card.locked:hover .card-image {
+  filter: blur(5px) brightness(0.5) grayscale(0.85);
+  transform: scale(1.04);
+}
+
+.chapter-card.locked .card-content {
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chapter-card.locked .card-title {
+  color: rgba(255, 255, 255, 0.7) !important;
+  text-shadow: none;
+}
+
+.chapter-card.locked .card-progress {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.chapter-card.locked:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Completed Badge */
+.card-completed-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+}
+
+.card-completed-badge svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* Light theme text fix */
+[data-theme="light"] .card-title {
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+[data-theme="light"] .card-progress {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .progress-icon {
+  opacity: 0.65;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .chapters-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .chapters-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .card-content {
+    padding: 20px 16px 16px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+  }
+  
+  .card-progress {
+    font-size: 12px;
+  }
+}
+
+/* Staggered Animation */
+.chapter-card:nth-child(1) {
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.chapter-card:nth-child(2) {
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.chapter-card:nth-child(3) {
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.chapter-card:nth-child(4) {
+  animation: fadeInUp 0.6s ease 0.4s both;
+}
+
+/* Accessibility */
+.chapter-card:focus {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-card,
+  .card-image,
+  .progress-bar-fill {
+    transition: none;
+  }
+  
+  .chapter-card:hover {
+    transform: none;
+  }
+  
+  .chapter-card:hover .card-image {
+    transform: none;
+  }
+}
