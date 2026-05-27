@@ -9,5 +9,5 @@ build:
 
 run:
   persistence:
-    - registration-page/data
+    - /data
   command: npm start
