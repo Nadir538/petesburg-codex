@@ -197,8 +197,7 @@ async function fetchRssFeed(url: string, sourceName: string, defaultCategory = '
 
 /**
  * GET /api/feed
- * Fetches St. Petersburg news from multiple live news sources (KudaGo Spb API, Петербургский Дневник RSS, etc.)
- * and combines them with custom user posts, eliminating static fake/fallback news cards!
+ * Fetches St. Petersburg news from multiple live news sources (KudaGo Spb API, RSS, etc.)
  */
 app.get(['/api/feed', '/registration-page/api/feed'], async (req: any, res: any) => {
   try {
@@ -305,7 +304,6 @@ app.get(['/api/feed', '/registration-page/api/feed'], async (req: any, res: any)
   } catch (error) {
     const err = error as any;
     console.error('Unified error in /api/feed GET:', err);
-    // Absolute minimum fallback which contains NO hardcoded backup fake news cards
     res.json({ success: true, posts: [] });
   }
 });
@@ -401,7 +399,6 @@ app.post(['/api/feed/edit/:id', '/registration-page/api/feed/edit/:id'], (req: a
   }
 });
 
-// Support both PUT (standard REST) and POST fallback for edits
 app.put(['/api/feed/:id', '/registration-page/api/feed/:id'], (req: any, res: any) => {
   try {
     const { id } = req.params;
